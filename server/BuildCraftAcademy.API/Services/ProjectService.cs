@@ -1,4 +1,4 @@
-using BuildCraftAcademy.API.Common;
+using BuildCraftAcademy.API.Common.Exceptions;
 using BuildCraftAcademy.API.Configs;
 using BuildCraftAcademy.API.DTOs.Project;
 using BuildCraftAcademy.API.Interfaces;
@@ -16,7 +16,7 @@ namespace BuildCraftAcademy.API.Services
             _context = context;
         }
 
-        public async Task<ApiResponse<IEnumerable<ProjectResponseDto>>> GetAllProjectsAsync(bool publishedOnly = false)
+        public async Task<IEnumerable<ProjectResponseDto>> GetAllProjectsAsync(bool publishedOnly = false)
         {
             var query = _context.Projects.AsQueryable();
 
@@ -40,19 +40,17 @@ namespace BuildCraftAcademy.API.Services
                 UpdatedAt = p.UpdatedAt
             }).ToListAsync();
 
-            return ApiResponse<IEnumerable<ProjectResponseDto>>.SuccessResponse(projects);
+            return projects;
         }
 
-        public async Task<ApiResponse<ProjectResponseDto>> GetProjectByIdAsync(Guid id)
+        public async Task<ProjectResponseDto> GetProjectByIdAsync(Guid id)
         {
             var p = await _context.Projects.FindAsync(id);
 
             if (p == null)
-            {
-                return ApiResponse<ProjectResponseDto>.FailureResponse("Project not found.");
-            }
+                throw new NotFoundException("Project not found.");
 
-            var response = new ProjectResponseDto
+            return new ProjectResponseDto
             {
                 Id = p.Id,
                 Title = p.Title,
@@ -66,11 +64,9 @@ namespace BuildCraftAcademy.API.Services
                 CreatedAt = p.CreatedAt,
                 UpdatedAt = p.UpdatedAt
             };
-
-            return ApiResponse<ProjectResponseDto>.SuccessResponse(response);
         }
 
-        public async Task<ApiResponse<ProjectResponseDto>> CreateProjectAsync(CreateProjectDto request)
+        public async Task<ProjectResponseDto> CreateProjectAsync(CreateProjectDto request)
         {
             var project = new Project
             {
@@ -89,7 +85,7 @@ namespace BuildCraftAcademy.API.Services
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
 
-            var response = new ProjectResponseDto
+            return new ProjectResponseDto
             {
                 Id = project.Id,
                 Title = project.Title,
@@ -102,18 +98,14 @@ namespace BuildCraftAcademy.API.Services
                 IsPublished = project.IsPublished,
                 CreatedAt = project.CreatedAt
             };
-
-            return ApiResponse<ProjectResponseDto>.SuccessResponse(response, "Project created successfully.");
         }
 
-        public async Task<ApiResponse<ProjectResponseDto>> UpdateProjectAsync(Guid id, UpdateProjectDto request)
+        public async Task<ProjectResponseDto> UpdateProjectAsync(Guid id, UpdateProjectDto request)
         {
             var project = await _context.Projects.FindAsync(id);
 
             if (project == null)
-            {
-                return ApiResponse<ProjectResponseDto>.FailureResponse("Project not found.");
-            }
+                throw new NotFoundException("Project not found.");
 
             if (request.Title != null) project.Title = request.Title;
             if (request.Description != null) project.Description = request.Description;
@@ -130,7 +122,7 @@ namespace BuildCraftAcademy.API.Services
             _context.Projects.Update(project);
             await _context.SaveChangesAsync();
 
-            var response = new ProjectResponseDto
+            return new ProjectResponseDto
             {
                 Id = project.Id,
                 Title = project.Title,
@@ -144,23 +136,19 @@ namespace BuildCraftAcademy.API.Services
                 CreatedAt = project.CreatedAt,
                 UpdatedAt = project.UpdatedAt
             };
-
-            return ApiResponse<ProjectResponseDto>.SuccessResponse(response, "Project updated successfully.");
         }
 
-        public async Task<ApiResponse<bool>> DeleteProjectAsync(Guid id)
+        public async Task<bool> DeleteProjectAsync(Guid id)
         {
             var project = await _context.Projects.FindAsync(id);
 
             if (project == null)
-            {
-                return ApiResponse<bool>.FailureResponse("Project not found.");
-            }
+                throw new NotFoundException("Project not found.");
 
             _context.Projects.Remove(project);
             await _context.SaveChangesAsync();
 
-            return ApiResponse<bool>.SuccessResponse(true, "Project deleted successfully.");
+            return true;
         }
     }
 }

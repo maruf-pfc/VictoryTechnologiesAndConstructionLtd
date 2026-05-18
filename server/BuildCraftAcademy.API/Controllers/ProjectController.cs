@@ -18,53 +18,42 @@ namespace BuildCraftAcademy.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProjects([FromQuery] bool publishedOnly = false)
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProjectResponseDto>>>> GetAllProjects([FromQuery] bool publishedOnly = false)
         {
-            var response = await _projectService.GetAllProjectsAsync(publishedOnly);
-            return Ok(response);
+            var result = await _projectService.GetAllProjectsAsync(publishedOnly);
+            return Ok(ApiResponse<IEnumerable<ProjectResponseDto>>.SuccessResponse(result));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProjectById(Guid id)
+        public async Task<ActionResult<ApiResponse<ProjectResponseDto>>> GetProjectById(Guid id)
         {
-            var response = await _projectService.GetProjectByIdAsync(id);
-            if (!response.Success)
-                return NotFound(response);
-
-            return Ok(response);
+            var result = await _projectService.GetProjectByIdAsync(id);
+            return Ok(ApiResponse<ProjectResponseDto>.SuccessResponse(result));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> CreateProject([FromBody] CreateProjectDto request)
+        public async Task<ActionResult<ApiResponse<ProjectResponseDto>>> CreateProject([FromBody] CreateProjectDto request)
         {
-            var response = await _projectService.CreateProjectAsync(request);
-            if (!response.Success)
-                return BadRequest(response);
-
-            return CreatedAtAction(nameof(GetProjectById), new { id = response.Data?.Id }, response);
+            var result = await _projectService.CreateProjectAsync(request);
+            var response = ApiResponse<ProjectResponseDto>.SuccessResponse(result, "Project created successfully.");
+            return CreatedAtAction(nameof(GetProjectById), new { id = result.Id }, response);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProject(Guid id, [FromBody] UpdateProjectDto request)
+        public async Task<ActionResult<ApiResponse<ProjectResponseDto>>> UpdateProject(Guid id, [FromBody] UpdateProjectDto request)
         {
-            var response = await _projectService.UpdateProjectAsync(id, request);
-            if (!response.Success)
-                return NotFound(response);
-
-            return Ok(response);
+            var result = await _projectService.UpdateProjectAsync(id, request);
+            return Ok(ApiResponse<ProjectResponseDto>.SuccessResponse(result, "Project updated successfully."));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProject(Guid id)
+        public async Task<ActionResult<ApiResponse<bool>>> DeleteProject(Guid id)
         {
-            var response = await _projectService.DeleteProjectAsync(id);
-            if (!response.Success)
-                return NotFound(response);
-
-            return Ok(response);
+            var result = await _projectService.DeleteProjectAsync(id);
+            return Ok(ApiResponse<bool>.SuccessResponse(result, "Project deleted successfully."));
         }
     }
 }
