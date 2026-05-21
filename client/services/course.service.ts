@@ -5,6 +5,9 @@ export const courseService = {
   getAll: (publishedOnly = true) =>
     api.get<ApiResponse<CourseResponseDto[]>>(`/course?publishedOnly=${publishedOnly}`).then((r) => r.data),
 
+  getEnrolled: () =>
+    api.get<ApiResponse<CourseResponseDto[]>>("/course/enrolled").then((r) => r.data),
+
   getById: (id: string) =>
     api.get<ApiResponse<CourseResponseDto>>(`/course/${id}`).then((r) => r.data),
 

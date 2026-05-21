@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using VTCLBD.API.Common;
 using VTCLBD.API.DTOs.Course;
 using VTCLBD.API.Interfaces;
@@ -21,6 +22,18 @@ namespace VTCLBD.API.Controllers
         public async Task<ActionResult<ApiResponse<IEnumerable<CourseResponseDto>>>> GetAllCourses([FromQuery] bool publishedOnly = false)
         {
             var result = await _courseService.GetAllCoursesAsync(publishedOnly);
+            return Ok(ApiResponse<IEnumerable<CourseResponseDto>>.SuccessResponse(result));
+        }
+
+        [Authorize]
+        [HttpGet("enrolled")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<CourseResponseDto>>>> GetEnrolledCourses()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(ApiResponse<object>.FailureResponse("User ID not found in token."));
+
+            var result = await _courseService.GetEnrolledCoursesAsync(userId);
             return Ok(ApiResponse<IEnumerable<CourseResponseDto>>.SuccessResponse(result));
         }
 

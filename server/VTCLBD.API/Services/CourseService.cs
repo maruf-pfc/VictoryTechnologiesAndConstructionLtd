@@ -41,6 +41,29 @@ namespace VTCLBD.API.Services
             return courses;
         }
 
+        public async Task<IEnumerable<CourseResponseDto>> GetEnrolledCoursesAsync(string userId)
+        {
+            var enrolledCourseIds = await _context.Enrollments
+                .Where(e => e.UserId == userId && e.IsActive)
+                .Select(e => e.CourseId)
+                .ToListAsync();
+
+            return await _context.Courses
+                .Where(c => enrolledCourseIds.Contains(c.Id))
+                .Select(c => new CourseResponseDto
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description,
+                    Price = c.Price,
+                    VideoUrl = c.VideoUrl,
+                    InstructorName = c.InstructorName,
+                    IsPublished = c.IsPublished,
+                    CreatedAt = c.CreatedAt,
+                    UpdatedAt = c.UpdatedAt
+                }).ToListAsync();
+        }
+
         public async Task<CourseResponseDto> GetCourseByIdAsync(Guid id)
         {
             var course = await _context.Courses.FindAsync(id);

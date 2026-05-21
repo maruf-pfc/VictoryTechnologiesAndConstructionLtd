@@ -68,8 +68,8 @@ function CourseCard({ course }: { course: CourseResponseDto }) {
 
 export default function MyCoursesPage() {
   const { data: coursesData, isLoading } = useQuery({
-    queryKey: ["courses"],
-    queryFn: () => courseService.getAll(true),
+    queryKey: ["enrolled-courses"],
+    queryFn: () => courseService.getEnrolled(),
   });
 
   const courses: CourseResponseDto[] = coursesData?.data ?? [];

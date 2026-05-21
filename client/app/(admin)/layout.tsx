@@ -13,6 +13,7 @@ import {
   RiLogoutBoxLine,
   RiHomeLine,
   RiShieldCheckLine,
+  RiUserLine,
 } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -23,6 +24,7 @@ const adminNavItems = [
   { label: "Manage Courses", href: "/admin/courses", icon: RiBookOpenLine },
   { label: "Manage Projects", href: "/admin/projects", icon: RiBuildingLine },
   { label: "Manage CMS", href: "/admin/cms", icon: RiSettings4Line },
+  { label: "Manage Users", href: "/admin/users", icon: RiUserLine },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

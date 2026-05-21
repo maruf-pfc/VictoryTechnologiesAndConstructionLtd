@@ -111,22 +111,26 @@ export default function LoginPage() {
         </button>
 
         {/* Demo credentials */}
-        <div className="rounded-xl border border-border bg-muted/30 p-3 space-y-1">
-          <p className="text-xs font-semibold text-muted-foreground">Demo Credentials</p>
-          <div className="flex gap-3 flex-wrap">
+        <div className="rounded-xl border border-border bg-muted/30 p-4 space-y-2.5">
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">🔐 Demo Login Credentials</p>
+          <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
-              className="text-xs text-primary hover:underline underline-offset-2"
-              onClick={() => { setValue("email", "admin@buildcraft.com"); setValue("password", "Admin@123!"); }}
+              className="flex flex-col items-start gap-0.5 px-3 py-2 rounded-lg border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all text-left"
+              onClick={() => { setValue("email", "admin@vtclbd.com"); setValue("password", "Admin@123!"); }}
             >
-              👑 Fill Admin
+              <span className="text-[10px] text-muted-foreground font-semibold">ADMIN</span>
+              <span className="text-xs text-primary font-bold">👑 Fill Admin</span>
+              <span className="text-[10px] text-muted-foreground font-mono">admin@vtclbd.com</span>
             </button>
             <button
               type="button"
-              className="text-xs text-primary hover:underline underline-offset-2"
-              onClick={() => { setValue("email", "student@buildcraft.com"); setValue("password", "Student@123!"); }}
+              className="flex flex-col items-start gap-0.5 px-3 py-2 rounded-lg border border-green-500/20 bg-green-500/5 hover:bg-green-500/10 transition-all text-left"
+              onClick={() => { setValue("email", "student@vtclbd.com"); setValue("password", "Student@123!"); }}
             >
-              🎓 Fill Student
+              <span className="text-[10px] text-muted-foreground font-semibold">STUDENT</span>
+              <span className="text-xs text-green-600 font-bold">🎓 Fill Student</span>
+              <span className="text-[10px] text-muted-foreground font-mono">student@vtclbd.com</span>
             </button>
           </div>
         </div>

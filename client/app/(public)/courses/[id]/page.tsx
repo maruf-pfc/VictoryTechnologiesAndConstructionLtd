@@ -122,12 +122,17 @@ export default function CourseDetailPage() {
   useEffect(() => {
     if (!course) return;
     gsap.fromTo(heroRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" });
-    gsap.fromTo(
-      ".module-item",
-      { opacity: 0, x: -20 },
-      { opacity: 1, x: 0, stagger: 0.07, duration: 0.4, ease: "power2.out", delay: 0.4 }
-    );
   }, [course]);
+
+  useEffect(() => {
+    if (modules && modules.length > 0) {
+      gsap.fromTo(
+        ".module-item",
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, stagger: 0.07, duration: 0.4, ease: "power2.out", delay: 0.1 }
+      );
+    }
+  }, [modules]);
 
   if (isLoading) {
     return (

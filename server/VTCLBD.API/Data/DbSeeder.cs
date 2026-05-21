@@ -13,6 +13,17 @@ namespace VTCLBD.API.Data
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var context = serviceProvider.GetRequiredService<AppDbContext>();
 
+            // Ensure all existing users are set to Active (since the migration default might be false)
+            var usersToActivate = await context.Users.Where(u => !u.IsActive).ToListAsync();
+            if (usersToActivate.Any())
+            {
+                foreach (var u in usersToActivate)
+                {
+                    u.IsActive = true;
+                }
+                await context.SaveChangesAsync();
+            }
+
             // ── Roles ─────────────────────────────────────────────────────────────
             string[] roles = { "Admin", "Student", "User" };
             foreach (var role in roles)
