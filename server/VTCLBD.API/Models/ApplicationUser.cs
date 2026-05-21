@@ -11,5 +11,6 @@ namespace VTCLBD.API.Models
         
         // This role property helps in easy tracking or mapping, though Identity handles roles via UserRoles.
         public string Role { get; set; } = "User";
+        public bool IsActive { get; set; } = true;
     }
 }

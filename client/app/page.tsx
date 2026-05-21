@@ -59,22 +59,26 @@ export default function HomePage() {
         { y: 60, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power3.out", delay: 0.3 }
       );
-      gsap.fromTo(
-        ".stat-card",
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power2.out",
-          scrollTrigger: { trigger: statsRef.current, start: "top 80%" },
-        }
-      );
-      gsap.fromTo(
-        ".animate-card",
-        { y: 50, opacity: 0 },
-        {
-          y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power2.out",
-          scrollTrigger: { trigger: ".cards-section", start: "top 80%" },
-        }
-      );
+      if (document.querySelectorAll(".stat-card").length > 0) {
+        gsap.fromTo(
+          ".stat-card",
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power2.out",
+            scrollTrigger: { trigger: statsRef.current, start: "top 80%" },
+          }
+        );
+      }
+      if (document.querySelectorAll(".animate-card").length > 0) {
+        gsap.fromTo(
+          ".animate-card",
+          { y: 50, opacity: 0 },
+          {
+            y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: "power2.out",
+            scrollTrigger: { trigger: ".cards-section", start: "top 80%" },
+          }
+        );
+      }
     });
     return () => ctx.revert();
   }, [courses, projects]);

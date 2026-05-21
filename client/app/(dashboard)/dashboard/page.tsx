@@ -67,12 +67,11 @@ export default function DashboardPage() {
   const { user } = useAuthStore();
 
   const { data: coursesData, isLoading } = useQuery({
-    queryKey: ["courses"],
-    queryFn: () => courseService.getAll(true),
+    queryKey: ["enrolled-courses"],
+    queryFn: () => courseService.getEnrolled(),
   });
 
-  // For demo: show all courses (in production, filter by enrollment)
-  const courses: CourseResponseDto[] = coursesData?.data?.slice(0, 3) ?? [];
+  const courses: CourseResponseDto[] = coursesData?.data ?? [];
 
   return (
     <div className="p-6 lg:p-8 space-y-8">

@@ -64,6 +64,9 @@ namespace VTCLBD.API.Services
             if (user == null)
                 throw new ApiException("Invalid credentials.", 401);
 
+            if (!user.IsActive)
+                throw new ApiException("Your account has been deactivated. Please contact support.", 403);
+
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
             if (!isPasswordValid)
                 throw new ApiException("Invalid credentials.", 401);
