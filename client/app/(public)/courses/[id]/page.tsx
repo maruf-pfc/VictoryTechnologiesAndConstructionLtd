@@ -26,11 +26,8 @@ import { courseService } from "@/services/course.service";
 import { paymentService } from "@/services/progress.service";
 import { useAuthStore } from "@/stores/auth.store";
 
-// Validation schema for Manual Enrollment Request
 const enrollmentSchema = zod.object({
-  paymentMethod: zod.enum(["bKash", "Nagad", "Bank Transfer"], {
-    errorMap: () => ({ message: "Please select a payment media." })
-  }),
+  paymentMethod: zod.enum(["bKash", "Nagad", "Bank Transfer"]),
   phoneNumber: zod.string().min(10, "Please enter a valid account or phone number (min 10 chars)."),
   transactionId: zod.string().min(6, "Please enter a valid Transaction ID (min 6 chars).")
 });
