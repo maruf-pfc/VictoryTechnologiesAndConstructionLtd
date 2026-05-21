@@ -21,13 +21,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore Dependencies
-        run: dotnet restore server/VTCLBD.slnx
+        run: dotnet restore VTCLBD.slnx
 
       - name: Build Solution
-        run: dotnet build server/VTCLBD.slnx --configuration Release --no-restore
+        run: dotnet build VTCLBD.slnx --configuration Release --no-restore
 
       - name: Run Tests
-        run: dotnet test server/VTCLBD.slnx --configuration Release --no-build --verbosity normal
+        run: dotnet test VTCLBD.slnx --configuration Release --no-build --verbosity normal
 
   # Frontend Build & Lint
   frontend:
@@ -41,13 +41,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: client/package-lock.json
 
       - name: Install Dependencies
         run: |
           cd client
-          npm ci
+          npm install
 
       - name: Lint Code
         run: |
@@ -79,7 +77,7 @@ jobs:
           context: ./server
           file: ./server/Dockerfile
           push: false
-          tags: buildcraft-backend:latest
+          tags: vtclbd-backend:latest
 
       - name: Build Frontend Docker Image (Dry Run)
         uses: docker/build-push-action@v5
@@ -87,4 +85,4 @@ jobs:
           context: ./client
           file: ./client/Dockerfile
           push: false
-          tags: buildcraft-frontend:latest
+          tags: vtclbd-frontend:latest
