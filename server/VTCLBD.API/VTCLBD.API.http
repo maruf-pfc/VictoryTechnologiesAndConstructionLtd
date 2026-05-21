@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
   "fullName": "Admin User",
-  "email": "admin@buildcraft.com",
+  "email": "admin@vtclbd.com",
   "password": "Admin@123!"
 }
 
@@ -18,7 +18,7 @@ POST {{HostAddress}}/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@buildcraft.com",
+  "email": "admin@vtclbd.com",
   "password": "Admin@123!"
 }
 
