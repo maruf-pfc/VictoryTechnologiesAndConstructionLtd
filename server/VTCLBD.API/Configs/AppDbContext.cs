@@ -20,6 +20,7 @@ namespace VTCLBD.API.Configs
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<PaymentRecord> Payments { get; set; }
         public DbSet<ContentBlock> ContentBlocks { get; set; }
+        public DbSet<JobPost> JobPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
