@@ -248,10 +248,10 @@ export default function HomePage() {
                         {banner.subtitle}
                       </p>
 
-                      <div className="flex gap-3 pt-2">
+                      <div className="flex gap-3 pt-2 perspective-container">
                         <Link
                           href="/courses"
-                          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:opacity-90 transition-all"
+                          className="btn-3d-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold transition-all"
                         >
                           Explore Courses
                           <RiArrowRightLine />
@@ -259,7 +259,7 @@ export default function HomePage() {
 
                         <Link
                           href="/contact"
-                          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md text-white text-sm font-semibold hover:bg-white/15 transition-all"
+                          className="btn-3d-secondary inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md text-white text-sm font-semibold transition-all"
                         >
                           Contact Us
                         </Link>
@@ -314,17 +314,17 @@ export default function HomePage() {
         {/* ── Stats Section ─────────────────────────────────────────────────── */}
         <section ref={statsRef} className="py-12 border-y border-border bg-muted/20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 perspective-container">
               {stats.map(({ label, value, icon: Icon }) => (
                 <div
                   key={label}
-                  className="stat-card flex flex-col items-center text-center p-5 rounded-2xl border border-border bg-card hover:border-primary/20 transition-all shadow-sm hover:shadow-md"
+                  className="card-3d hover-border-glow stat-card flex flex-col items-center text-center p-5 rounded-2xl border border-border bg-card shadow-sm transition-all duration-300"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <div className="card-3d-content w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                     <Icon className="text-primary text-xl" />
                   </div>
-                  <div className="text-2xl font-bold text-heading">{value}</div>
-                  <div className="text-[11px] font-semibold text-muted-foreground mt-0.5">{label}</div>
+                  <div className="card-3d-content text-2xl font-bold text-heading">{value}</div>
+                  <div className="card-3d-content text-[11px] font-semibold text-muted-foreground mt-0.5">{label}</div>
                 </div>
               ))}
             </div>
@@ -341,20 +341,20 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
             {services.map((service, idx) => (
               <div
                 key={idx}
-                className="group rounded-3xl border border-border/80 bg-card p-6 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 relative overflow-hidden"
+                className="card-3d hover-border-glow group rounded-3xl border border-border/80 bg-card p-6 shadow-sm relative overflow-hidden transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-secondary/15 flex items-center justify-center mb-4 text-secondary">
+                <div className="card-3d-content w-10 h-10 rounded-xl bg-secondary/15 flex items-center justify-center mb-4 text-secondary">
                   <RiServiceLine className="text-lg" />
                 </div>
-                <h3 className="font-bold text-sm text-heading mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">{service.description}</p>
+                <h3 className="card-3d-content font-bold text-sm text-heading mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
+                <p className="card-3d-content text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">{service.description}</p>
                 <button
                   onClick={() => setSelectedService(service)}
-                  className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
+                  className="card-3d-content text-xs font-semibold text-primary hover:underline flex items-center gap-1 mt-auto"
                 >
                   Learn Details <RiArrowRightLine className="text-xs group-hover:translate-x-0.5 transition-transform" />
                 </button>
@@ -385,34 +385,34 @@ export default function HomePage() {
                 <p className="text-xs text-muted-foreground font-semibold">No active training courses found. Please check back later.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {courses.map((course) => (
-                  <Link
-                    key={course.id}
-                    href={`/courses/${course.id}`}
-                    className="animate-card group rounded-3xl border border-border bg-card overflow-hidden hover:border-primary/25 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col"
-                  >
-                    <div className="h-44 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent flex items-center justify-center shrink-0">
-                      <RiGraduationCapLine className="text-5xl text-primary/30 group-hover:text-primary/50 transition-colors" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
+              {courses.map((course) => (
+                <Link
+                  key={course.id}
+                  href={`/courses/${course.id}`}
+                  className="card-3d hover-border-glow group rounded-3xl border border-border bg-card overflow-hidden transition-all duration-300 flex flex-col"
+                >
+                  <div className="card-3d-content h-44 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent flex items-center justify-center shrink-0">
+                    <RiGraduationCapLine className="text-5xl text-primary/30 group-hover:text-primary/50 transition-colors" />
+                  </div>
+                  <div className="card-3d-content p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <span className="text-[10px] text-muted-foreground font-bold uppercase">{course.instructorName}</span>
+                      <h3 className="font-bold text-xs sm:text-sm text-heading leading-snug group-hover:text-primary transition-colors line-clamp-1">
+                        {course.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{course.description}</p>
                     </div>
-                    <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                      <div className="space-y-2">
-                        <span className="text-[10px] text-muted-foreground font-bold uppercase">{course.instructorName}</span>
-                        <h3 className="font-bold text-xs sm:text-sm text-heading leading-snug group-hover:text-primary transition-colors line-clamp-1">
-                          {course.title}
-                        </h3>
-                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{course.description}</p>
-                      </div>
-                      <div className="flex items-center justify-between border-t border-border/60 pt-3">
-                        <span className="font-extrabold text-xs text-primary">{formatPrice(course.price)}</span>
-                        <span className="inline-flex items-center gap-1 text-[10px] text-primary font-bold">
-                          Get Enrolled <RiArrowRightLine />
-                        </span>
-                      </div>
+                    <div className="flex items-center justify-between border-t border-border/60 pt-3">
+                      <span className="font-extrabold text-xs text-primary">{formatPrice(course.price)}</span>
+                      <span className="inline-flex items-center gap-1 text-[10px] text-primary font-bold">
+                        Get Enrolled <RiArrowRightLine />
+                      </span>
                     </div>
-                  </Link>
-                ))}
-              </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
             )}
           </div>
         </section>

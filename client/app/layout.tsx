@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { cn } from "@/lib/utils";
 import { AiChatbot } from "@/components/ai-chatbot";
 
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-sans" });
+const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
 const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn(spaceGrotesk.variable, fontMono.variable)}>
+    <html lang="en" suppressHydrationWarning className={cn(plusJakartaSans.variable, fontMono.variable)}>
       <body className="antialiased font-sans">
         <Providers>
           {children}

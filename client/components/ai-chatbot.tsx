@@ -67,7 +67,11 @@ ${systemContext}
 
 User Question: ${userText}`;
 
-      const response = await axios.post("/api/chat", { prompt: promptText });
+      const response = await axios.post("/api/chat", {
+        prompt: promptText,
+        message: userText,
+        context: systemContext
+      });
       const responseText =
         response.data?.text ||
         "I'm sorry, I'm having trouble processing that right now. Please reach out to our team at +88 01779481486.";
@@ -75,11 +79,21 @@ User Question: ${userText}`;
       setMessages((prev) => [...prev, { role: "assistant", text: responseText }]);
     } catch (error) {
       console.error("AI Chatbot Error:", error);
+      // Secondary local fallback if the API endpoint itself is unreachable
+      let fallbackMsg = "Victory Design & Construction (VTCLBD) is a leading architectural design and structural consultancy firm in Bangladesh.\n\nFor direct assistance, please contact us at +88 01779481486 or email victorydesign72@gmail.com.";
+      
+      const normalizedQuery = userText.toLowerCase();
+      if (normalizedQuery.includes("course") || normalizedQuery.includes("learn") || normalizedQuery.includes("training")) {
+        fallbackMsg = "We offer professional courses in structural engineering, interior design, and site supervision. Check out our Training page or call +88 01779481486 for details.";
+      } else if (normalizedQuery.includes("branch") || normalizedQuery.includes("office") || normalizedQuery.includes("location")) {
+        fallbackMsg = "Our offices are located at:\n- Main Branch: Eastern Kamalapur Complex, 2nd Floor, Room No 206, Kamalapur, Dhaka.\n- Branch Office: Madhya Bazar, Chandina, Cumilla.";
+      }
+      
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          text: "Sorry, I am having trouble connecting right now. Please contact victorydesign72@gmail.com directly.",
+          text: fallbackMsg,
         },
       ]);
     } finally {
