@@ -45,8 +45,69 @@ namespace VTCLBD.API.Data
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 });
-                await context.SaveChangesAsync();
             }
+
+            // Ensure about-company-vision exists
+            var visionBlock = await context.ContentBlocks.FirstOrDefaultAsync(b => b.Identifier == "about-company-vision");
+            if (visionBlock == null)
+            {
+                context.ContentBlocks.Add(new ContentBlock
+                {
+                    Id = Guid.NewGuid(),
+                    Identifier = "about-company-vision",
+                    Content = "To be the most trusted structural engineering, architectural planning, and interior designing firm in Bangladesh, delivering sustainable, state-of-the-art designs aligned with global standards.",
+                    Type = "Text",
+                    IsActive = true,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Ensure contact-office-address exists
+            var contactBlock = await context.ContentBlocks.FirstOrDefaultAsync(b => b.Identifier == "contact-office-address");
+            if (contactBlock == null)
+            {
+                context.ContentBlocks.Add(new ContentBlock
+                {
+                    Id = Guid.NewGuid(),
+                    Identifier = "contact-office-address",
+                    Content = "Main Branch: Eastern Kamalapur Complex, 2nd Floor, Room No 206, Kamalapur, Dhaka 1000.\nCumilla Branch: Madhya Bazar, Chandina, Cumilla.",
+                    Type = "Text",
+                    IsActive = true,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Ensure academy-training-tagline exists
+            var trainingBlock = await context.ContentBlocks.FirstOrDefaultAsync(b => b.Identifier == "academy-training-tagline");
+            if (trainingBlock == null)
+            {
+                context.ContentBlocks.Add(new ContentBlock
+                {
+                    Id = Guid.NewGuid(),
+                    Identifier = "academy-training-tagline",
+                    Content = "VTCLBD Academy empowers next-generation engineers, architects, and designers with hands-on professional courses in Revit, interior design, and site supervision.",
+                    Type = "Text",
+                    IsActive = true,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Ensure home-hero-subtitle exists
+            var heroBlock = await context.ContentBlocks.FirstOrDefaultAsync(b => b.Identifier == "home-hero-subtitle");
+            if (heroBlock == null)
+            {
+                context.ContentBlocks.Add(new ContentBlock
+                {
+                    Id = Guid.NewGuid(),
+                    Identifier = "home-hero-subtitle",
+                    Content = "Professional structural, architectural, and interior solutions. Over 2,500+ trained professionals and 50+ completed architectural projects in Bangladesh.",
+                    Type = "Text",
+                    IsActive = true,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            await context.SaveChangesAsync();
 
             // ── Admin User ────────────────────────────────────────────────────────
             const string adminEmail = "admin@vtclbd.com";
