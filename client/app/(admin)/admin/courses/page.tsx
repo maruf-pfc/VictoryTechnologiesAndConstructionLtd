@@ -63,7 +63,7 @@ export default function AdminCoursesPage() {
   // Query Modules for the selected course
   const { data: modulesRes, refetch: refetchModules } = useQuery({
     queryKey: ["admin-course-modules", editingCourse?.id],
-    queryFn: () => (editingCourse ? courseService.getModules(editingCourse.id) : Promise.resolve({ data: [] })),
+    queryFn: () => (editingCourse ? courseService.getModules(editingCourse.id) : Promise.resolve({ success: true, message: "", data: [] as ModuleResponseDto[] })),
     enabled: !!editingCourse && activeTab === "curriculum",
   });
 

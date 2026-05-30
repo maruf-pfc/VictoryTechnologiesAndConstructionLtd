@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "@/stores/auth.store";
 import {
   RiGraduationCapLine,
@@ -33,8 +33,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const { isAuthenticated, user, logout } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     if (!isAuthenticated) {
       toast.error("Please log in to access the Admin Panel.");
       router.replace("/auth/login");
@@ -45,9 +52,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       toast.error("Access denied. Admin role required.");
       router.replace("/dashboard");
     }
-  }, [isAuthenticated, user, router]);
+  }, [mounted, isAuthenticated, user, router]);
 
-  if (!isAuthenticated || user?.role !== "Admin") return null;
+  if (!mounted || !isAuthenticated || user?.role !== "Admin") return null;
 
   return (
     <div className="flex min-h-screen bg-muted/10">

@@ -9,14 +9,14 @@ const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: {
-    default: "BuildCraft Academy",
-    template: "%s | BuildCraft Academy",
+    default: "Victory Design & Construction Ltd",
+    template: "%s | Victory Design & Construction Ltd",
   },
   description:
     "Expert-led courses in construction, interior design, and structural engineering. Learn online, build with confidence.",
   keywords: ["construction courses", "interior design", "structural engineering", "Bangladesh", "online learning"],
   openGraph: {
-    title: "BuildCraft Academy",
+    title: "Victory Design & Construction Ltd",
     description: "Expert-led courses in construction and design.",
     type: "website",
   },

@@ -48,6 +48,11 @@ namespace VTCLBD.API.Services
                 .Select(e => e.CourseId)
                 .ToListAsync();
 
+            if (enrolledCourseIds.Count == 0)
+            {
+                return Enumerable.Empty<CourseResponseDto>();
+            }
+
             return await _context.Courses
                 .Where(c => enrolledCourseIds.Contains(c.Id))
                 .Select(c => new CourseResponseDto

@@ -44,12 +44,12 @@ export default function AdminUsersPage() {
   const updateRoleMutation = useMutation({
     mutationFn: ({ userId, role }: { userId: string; role: string }) =>
       userService.updateRole(userId, role),
-    onSuccess: (res) => {
+    onSuccess: (res, variables) => {
       toast.success(res.message || "Role updated successfully");
       queryClient.invalidateQueries({ queryKey: ["admin-users"] });
       // Update selectedUser if open
       if (selectedUser) {
-        setSelectedUser((prev) => (prev ? { ...prev, role: res.data ? "Student" : prev.role } : null));
+        setSelectedUser((prev) => (prev ? { ...prev, role: variables.role } : null));
       }
     },
     onError: (err: any) => toast.error(err.response?.data?.message || err.message || "Failed to update role"),

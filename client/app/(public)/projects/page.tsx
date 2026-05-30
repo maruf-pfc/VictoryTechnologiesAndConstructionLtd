@@ -60,6 +60,8 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen pt-24 bg-[#FAFAFA]">
+      <title>Consultancy & Construction Showcase | Victory Design & Construction Ltd</title>
+      <meta name="description" content="Explore our portfolio of signature architectural designs, interior decoration, structural detailing, and heavy civil construction projects." />
       {/* Header section */}
       <div ref={headerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-3xl space-y-3">
