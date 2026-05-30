@@ -18,19 +18,19 @@ VTCLBD is a state-of-the-art construction, consultancy, and technical training p
 
 ```mermaid
 graph TD
-    A[Next.js 14 Frontend Client] <-->|HTTPS / JSON REST API| B[.NET 8.0 Web API Server]
+    A[Next.js 16 Frontend Client] <-->|HTTPS / JSON REST API| B[.NET 10.0 Web API Server]
     B <-->|Entity Framework Core| C[(PostgreSQL Database)]
     B -->|Third-Party Integrations| D[Cloudinary / SSLCommerz / bKash]
 ```
 
 ### Frontend Client
-*   **Framework**: Next.js 14 (App Router)
+*   **Framework**: Next.js 16 (App Router)
 *   **Styling**: Modern CSS variables & Tailwind CSS
 *   **State & Querying**: `@tanstack/react-query` & `Axios`
 *   **Form Management**: `react-hook-form` & `Zod`
 
 ### Backend Server
-*   **Runtime**: .NET Core 8.0
+*   **Runtime**: .NET Core 10.0
 *   **Database**: PostgreSQL
 *   **ORM**: Entity Framework Core
 *   **Authentication**: JWT Bearer Tokens & ASP.NET Core Identity
@@ -40,8 +40,8 @@ graph TD
 ## 📦 Getting Started (Local Development)
 
 ### Prerequisites
-*   Node.js (v18+) or Bun
-*   .NET 8.0 SDK
+*   Node.js (v22+) or Bun
+*   .NET 10.0 SDK
 *   PostgreSQL running locally (or via Docker)
 
 ### 1. Setting Up the Database & Backend

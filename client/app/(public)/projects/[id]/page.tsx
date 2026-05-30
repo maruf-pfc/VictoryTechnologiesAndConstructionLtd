@@ -113,6 +113,8 @@ export default function ProjectDetailPage() {
 
   return (
     <div className="min-h-screen pt-20 bg-[#FAFAFA]">
+      <title>{`${project.title} | Victory Design & Construction Ltd`}</title>
+      <meta name="description" content={project.description || "Portfolio project detailed facts and description."} />
       {/* Back Button Navigation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <Link

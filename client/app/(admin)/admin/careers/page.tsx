@@ -27,7 +27,7 @@ const schema = z.object({
   jobType: z.string().min(2, "Job type must be at least 2 characters"),
   description: z.string().min(5, "Description must be at least 5 characters"),
   requirements: z.string().min(5, "Requirements must be at least 5 characters"),
-  salaryRange: z.string().max(100).default("Negotiable"),
+  salaryRange: z.string().max(100),
   googleFormUrl: z.string().url("Must be a valid Google Form URL"),
   isPublished: z.boolean(),
 });

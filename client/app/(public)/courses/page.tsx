@@ -59,6 +59,8 @@ export default function CoursesPage() {
 
   return (
     <div className="min-h-screen pt-24">
+      <title>Professional Courses | Victory Design & Construction Ltd</title>
+      <meta name="description" content="Unlock expert-led training in civil engineering, architecture, interior design, and construction project management." />
       {/* Header */}
       <div
         ref={headerRef}

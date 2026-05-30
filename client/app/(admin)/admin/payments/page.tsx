@@ -164,7 +164,7 @@ export default function AdminPaymentsPage() {
 
                     {/* Action Button */}
                     <td className="p-4 text-center">
-                      {payment.status?.toLowerCase() === "pending" ? (
+                      {payment.status?.toLowerCase() !== "success" && payment.status?.toLowerCase() !== "approved" ? (
                         <button
                           disabled={approveMutation.isPending}
                           onClick={() => approveMutation.mutate(payment.id)}

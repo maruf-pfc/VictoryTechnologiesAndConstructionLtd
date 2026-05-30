@@ -56,6 +56,8 @@ export default function CareerPage() {
 
   return (
     <div className="space-y-16 py-16 min-h-screen bg-background">
+      <title>Careers & Opportunities | Victory Design & Construction Ltd</title>
+      <meta name="description" content="Build your professional engineering and design career with Victory Design & Construction Ltd. Explore our open job roles and apply today." />
       {/* ── Hero section ──────────────────────────────────────────────────── */}
       <section
         className="relative pt-24 pb-8 overflow-hidden"

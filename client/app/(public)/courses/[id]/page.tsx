@@ -155,6 +155,8 @@ export default function CourseDetailPage() {
 
   return (
     <div className="min-h-screen pt-20 bg-[#FAFAFA]">
+      <title>{`${course.title} | Victory Design & Construction Ltd`}</title>
+      <meta name="description" content={course.description || "Learn from industry experts at Victory Design & Construction Ltd."} />
       <div
         ref={heroRef}
         className="border-b border-border"
